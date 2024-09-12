@@ -1,0 +1,93 @@
+/* Ensure HTML and body cover full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Style for the entire page */
+.page-container {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: center; /* Center align navbar items */
+  align-items: center;
+  background-color: #0073ff;
+  color: white;
+  padding: 25px 40px; /* Increased padding for more height */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure navbar is above other content */
+}
+
+.navbar-brand {
+  font-size: 24px; /* Increased font size for brand */
+  font-weight: bold;
+  margin-right: 20px; /* Space between brand and menu */
+}
+
+.navbar-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar-menu li {
+  margin: 0 15px; /* Increased margin for larger spacing between items */
+}
+
+.navbar-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px; /* Increased font size for menu items */
+  padding: 10px 15px; /* Added padding for larger clickable area */
+}
+
+.navbar-menu a:hover {
+  text-decoration: underline;
+}
+
+/* Content styling */
+.graph-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f4f6f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 80px; /* Increased margin to avoid overlap with larger fixed navbar */
+  flex: 1; /* Allow the container to take up available space */
+  width: 100%; /* Full width of the viewport */
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Move the graph further to the left */
+.graph-wrapper {
+  width: calc(100% - 80px); /* Further decrease width to move it to the left */
+  height: calc(100vh - 80px - 100px - 100px); /* Adjust height considering the increased navbar */
+  max-height: 100%; /* Ensure it doesn't exceed the container height */
+  overflow: hidden; /* Prevent scrollbars */
+  margin-left: 55px; /* Move the graph further to the left by 20 cm (approximately 55px) */
+}
+
+@media (max-width: 768px) {
+  .graph-wrapper {
+    height: 150px; /* Adjust height for small screens, if needed */
+  }
+}
