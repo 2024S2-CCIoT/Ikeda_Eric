@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import mqtt from 'mqtt';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import './Paggraf.css';
 
@@ -30,19 +31,54 @@ const generateRandomData = (): DataPoint[] => {
 };
 
 const Paggraf: React.FC = () => {
-  // Estado para os dados e se são simulados
+  // Estado para os dados e o cliente MQTT
   const [data, setData] = useState<DataPoint[]>([]);
   const [isSimulated, setIsSimulated] = useState<boolean>(true); // Definido como verdadeiro inicialmente
+  const [client, setClient] = useState<any>(null);
+
+  // Configuração do cliente MQTT e assinatura do tópico
+  useEffect(() => {
+    if (!isSimulated) {
+      const mqttClient = mqtt.connect('wss://broker.hivemq.com:8000/mqtt'); // Usando WebSockets
+
+      mqttClient.on('connect', () => {
+        console.log('Connected to MQTT broker');
+        mqttClient.subscribe('sensor/data', (err: any) => {
+          if (err) {
+            console.error('Subscription error:', err);
+          }
+        });
+      });
+
+      mqttClient.on('message', (topic: string, message: Buffer) => {
+        if (topic === 'sensor/data') {
+          const receivedData = JSON.parse(message.toString());
+          const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          setData((prevData) => [
+            ...prevData,
+            {
+              time,
+              temperature: receivedData.temperature,
+              humidity: receivedData.humidity,
+              vibration: receivedData.vibration,
+            },
+          ]);
+        }
+      });
+
+      setClient(mqttClient);
+
+      // Limpeza ao desmontar
+      return () => {
+        mqttClient.end();
+      };
+    }
+  }, [isSimulated]);
 
   // Simular dados
   useEffect(() => {
     if (isSimulated) {
       setData(generateRandomData());
-    } else {
-      // Aqui você pode adicionar a lógica para carregar dados reais
-      // Exemplo:
-      // setData(fetchRealData());
-      console.log('Dados reais não implementados');
     }
   }, [isSimulated]);
 
