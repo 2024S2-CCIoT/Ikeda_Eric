@@ -1,12 +1,12 @@
-/* Ensure HTML and body cover full height */
+/* Garanta que HTML e body cubram toda a altura */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Prevent scrolling */
+  overflow: hidden;
 }
 
-/* Style for the entire page */
+/* Estilo para a página inteira */
 .page-container {
   font-family: Arial, sans-serif;
   color: #333;
@@ -15,28 +15,28 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
 }
 
-/* Navbar styling */
+/* Estilização da Navbar */
 .navbar {
   display: flex;
-  justify-content: center; /* Center align navbar items */
+  justify-content: center;
   align-items: center;
   background-color: #0073ff;
   color: white;
-  padding: 25px 40px; /* Increased padding for more height */
+  padding: 20px;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 1000; /* Ensure navbar is above other content */
+  z-index: 1000;
 }
 
 .navbar-brand {
-  font-size: 24px; /* Increased font size for brand */
+  font-size: 24px;
   font-weight: bold;
-  margin-right: 20px; /* Space between brand and menu */
+  margin-right: 20px;
 }
 
 .navbar-menu {
@@ -47,21 +47,21 @@ html, body {
 }
 
 .navbar-menu li {
-  margin: 0 15px; /* Increased margin for larger spacing between items */
+  margin: 0 15px;
 }
 
 .navbar-menu a {
   color: white;
   text-decoration: none;
-  font-size: 18px; /* Increased font size for menu items */
-  padding: 10px 15px; /* Added padding for larger clickable area */
+  font-size: 18px;
+  padding: 10px 15px;
 }
 
 .navbar-menu a:hover {
   text-decoration: underline;
 }
 
-/* Content styling */
+/* Estilização do conteúdo */
 .graph-container {
   display: flex;
   flex-direction: column;
@@ -71,23 +71,28 @@ html, body {
   background-color: #f4f6f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 80px; /* Increased margin to avoid overlap with larger fixed navbar */
-  flex: 1; /* Allow the container to take up available space */
-  width: 100%; /* Full width of the viewport */
-  overflow: hidden; /* Prevent scrollbars */
+  margin-top: 80px;
+  flex: 1;
+  width: 100%;
 }
 
-/* Move the graph further to the left */
 .graph-wrapper {
-  width: calc(100% - 80px); /* Further decrease width to move it to the left */
-  height: calc(100vh - 80px - 100px - 100px); /* Adjust height considering the increased navbar */
-  max-height: 100%; /* Ensure it doesn't exceed the container height */
-  overflow: hidden; /* Prevent scrollbars */
-  margin-left: 55px; /* Move the graph further to the left by 20 cm (approximately 55px) */
+  width: calc(100% - 80px); /* Reduza a largura do gráfico se necessário */
+  height: calc(100vh - 80px - 100px - 60px); /* Ajuste a altura considerando o tamanho da navbar e a mensagem de status */
+  max-height: 80%; /* Limite a altura máxima para deixar o gráfico menor */
+  overflow: hidden; /* Evita barras de rolagem */
+  margin-left: 55px; /* Ajusta a margem esquerda se necessário */
 }
 
 @media (max-width: 768px) {
   .graph-wrapper {
-    height: 150px; /* Adjust height for small screens, if needed */
+    height: 300px; /* Ajuste a altura para telas pequenas */
   }
+}
+
+.data-status {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0073ff; /* Cor azul para destacar */
+  margin-bottom: 20px; /* Espaço abaixo da mensagem */
 }
